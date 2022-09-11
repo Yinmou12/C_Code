@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+void my_strcpy(char* str,const char* source_str);
+
+//int main() {
+//	//int arr[10] = { 1,2,3,4,5,6,7,8,9 };
+//	//int i = 0;
+//	////printf("%d\n", (&i-(arr)));
+//	//for (i = 0; i <= (&i-(arr)); i++) {
+//	//	printf("Hello,world!\n");
+//	//	arr[i] = 0;
+//	//}
+//	//可能会造成死循环
+//	//原因：
+//	//1、局部变量存放在栈区，栈区的数据默认存放地址是由高到低的
+//	//2、数组中的数据，随数组下标的增大，该数据存放的地址是由低到高变化的,所以存在某个值x,使得arr[x]的地址与变量i的地址相同，所以i的值会被修改为0
+//	//从而造成死循环
+//	//不同的编译器上，造成的死循环的位置不相同，因为内存布局的位置不同
+//	//不要越界！！！
+//
+//	system("pause");
+//	return 0;
+//}
+
+
+//实现字符串的拷贝 以及代码的优化;
+//void my_strcpy(char* dest, const char* src) {
+//	while (*src!='\0') {
+//		*dest++ = *src++;
+//	}
+//	*dest = *src;					//拷贝'\0'
+//}
+
+//void my_strcpy(char* dest, const char* src) {
+//	if(dest!=NULL&&src!=NULL)
+//		while (*dest++ = *src++);
+//}
+
+void my_strcpy(char* dest, const char* src) {
+	assert(dest != NULL);	//断言
+	assert(src != NULL);	//断言
+	while (*dest++ = *src++);
+}
+
+int main() {
+	char arr1[] = "#############";
+	char arr2[] = "bit";
+	my_strcpy(arr1, arr2);
+	printf("%s\n", arr1);
+	
+	system("pause");
+	return 0;
+}
