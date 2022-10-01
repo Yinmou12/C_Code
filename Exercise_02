@@ -1,0 +1,158 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <math.h>
+
+//字符串逆序
+void reverse_str(char *str){
+    assert(str);
+    int len = strlen(str);
+    char *left = str;
+    char *right = (str+len-1);
+    while(left<right){
+        char temp = *left;
+        *left++ = *right;
+        *right-- = temp;
+    }
+}
+// int main(){
+//     char arr[256] = {0};
+//     //scanf("%s",arr);
+//     gets(arr);//读取一行
+//     int len = strlen(arr);
+//     reverse_str(arr);
+//     printf("%s\n",arr);
+//     return 0;
+// }
+
+//计算求和Sn=a+aa+aaa+aaaa+aaaaa;
+int Sum(int a,int n){
+    int i = 0;
+    int sum = 0;
+    int ret=0;
+    while (i<n)
+    {
+        ret = ret*10 + a;
+        sum+=ret;
+        i++;
+    }
+    return sum;
+}
+// int main(){
+//     int x=0;
+//     int n=0;
+//     scanf("%d %d",&x,&n);
+//     int sum = Sum(x,n);
+//     printf("%d\n",sum);
+//     return 0;
+// }
+
+//打印水仙花数
+// int main(){
+//     int i = 0;
+//     int x=0;   
+//     for(i=0; i<=100000; i++){
+//         x=i;
+//         int num=1;
+//         int sum=0;
+//         while(x/=10){
+//             num++;     
+//         }
+//         x=i;
+//         while(x){
+//             sum += pow(x%10,num);
+//             x/=10;
+//         }
+//         if(sum==i){
+//             printf("%d\n",i);
+//         } 
+//     }
+//     return 0;
+// }
+
+//打印菱形
+void my_Print(){
+    int n = 0;
+    scanf("%d",&n);
+    while(1){
+        if(n%2==0){
+            printf("请输入奇数.\n");
+            scanf("%d",&n);
+        }
+        if(n%2==1) break;
+    }   
+    int line=0;             //行数             
+    int j = (n/2);          //第一行前面的应有的" "的个数
+    int blank = 0;          //记录每行要打印的 "  " 的个数
+    int row = 1;            //每行要打印的 "* " 的个数
+    for(line=1;line<=n;line++){
+        //计算每一行"*"的个数
+        if(line <= (n/2+1)){
+            row = line*2 - 1;
+        }
+        if(line > (n/2+1)){
+            row = (n-line)*2 +1;
+        }
+        //打印 " "
+        blank=j;
+        while(blank){
+            printf("  ");
+            blank--;
+        }
+        //打印 "*"
+        int x = row;
+        while(x){
+            printf("* ");
+            x--;
+        }
+        printf("\n");
+        //更新下一行 " " 的个数
+        if(line <= (n/2+1)) j--;
+        if(line > (n/2+1)) j++;
+        if(j < 0) j=1;
+    }
+}
+void other_Print(){
+    int line = 0;
+    scanf("%d",&line);
+    while(1){
+        if(line%2 == 0){
+            printf("请输入一个奇数.");
+            scanf("%d",&line);
+        }
+        if(line%2 == 1) break;
+    }
+    int i = 0;
+    //打印上半部分  
+    for(i=0;i<line;i++){
+        //打印空格
+        int j = 0;
+        for(j=0;j<line-1-i;j++){
+            printf("  ");
+        }
+        //打印 "* "
+        for(j=0;j< (i*2+1); j++){
+            printf("* ");
+        }
+        printf("\n");
+    }
+    //打印下半部分
+    for(i=0; i<line-1;i++){
+        //打印空格
+        int j=0;
+        for(j=0; j<=i; j++){
+            printf("  ");
+        }
+        //打印*
+        for(j=0;j< (line-i-1)*2-1;j++){
+            printf("* ");
+        }
+        printf("\n");
+    }
+}
+// int main(){  
+//     my_Print();
+//     //other_Print();
+//     return 0;
+// }
