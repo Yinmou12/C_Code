@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+//字符串旋转
+
+//1、暴力求解
+// int cmp_str(char *str,char *cmp_str){
+//     assert(str);
+//     int size = strlen(str);
+//     int sign = 0;
+//     int i=0;   
+//     for(i=0;i<size-1;i++){
+//         if( strcmp(str,cmp_str) == 0) sign=1;
+//         char temp = *str;
+//         int j=0;
+//         for(j=0;j<size;j++){
+//             *(str+j) = *(str+j+1);
+//         }
+//         *(str+size-1) = temp;
+//     }
+//     return sign;
+// }
+// int main(){
+//     char str1[] = "AABCD";
+//     //注意实参是数组类型的，而非是指针类型
+//     //char *str = "AABCD";其中 str 是字符常量不可修改
+//     char str2[] = "BCDAA";
+//     //int ret = cmp_str(str1,str2);
+//     //printf("%d\n",ret);
+//     return 0;
+// }
+
+//2、三步翻转法
+//self
+// void _swaq(char *e1,char *e2){
+//     while(e1<e2){
+//         char temp = *e1;
+//         *e1++ = *e2;
+//         *e2-- = temp;
+//     }
+// }
+// int left_move(char *str,int step,char *cmp_str){
+//     char *mid = str+step-1;
+//     char *tail = str+strlen(str)-1;
+//     char *head = str;
+//     _swaq(head,mid);
+//     mid = str+step;
+//     _swaq(mid,tail);
+//     tail = str+strlen(str)-1;
+//     head = str;
+//     _swaq(head,tail);
+//     printf("%s\n",str);
+//     if(strcmp(str,cmp_str)==0) return 1;
+//     else return 0;
+// }
+// int main(){
+//     char arr[] = "AABCDEFG";
+//     char *cmp_str = "DEFGAABC";
+//     printf("%d\n",left_move(arr,4,cmp_str));
+//     return 0;
+// }
+
+//answer
+void reverse(char *head,char *tail){
+    assert(head!=NULL);
+    assert(tail!=NULL);
+    while(head<tail){
+        char temp = *head;
+        *head++ = *tail;
+        *tail-- = temp;
+    }
+}
+int left_move(char *str,int step,char *cmp_str){
+    int len = strlen(str);
+    assert(step<=len);
+    reverse(str,str+step-1);//逆序左边
+    reverse(str+step,str+len-1);//逆序右边
+    reverse(str,str+len-1);//逆序整体
+    if(strcmp(str,cmp_str)==0) return 1;
+    else return 0;
+}
+int main(){
+    char str[] = "AABCDEFG";
+    char *cmp_str = "DEFGAABC";
+    printf("%d\n",left_move(str,4,cmp_str));
+    return 0;
+}
