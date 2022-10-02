@@ -4,8 +4,6 @@
 #include <assert.h>
 
 //字符串旋转
-
-//1、暴力求解
 // int cmp_str(char *str,char *cmp_str){
 //     assert(str);
 //     int size = strlen(str);
@@ -32,7 +30,8 @@
 //     return 0;
 // }
 
-//2、三步翻转法
+
+//三步翻转法(给定要翻转的次数)
 //self
 // void _swaq(char *e1,char *e2){
 //     while(e1<e2){
