@@ -211,3 +211,76 @@ char *my_strncat(char *dest,const char *src,int count){
 //     return 0;
 // }
 
+// **************************************** strncmp ****************************************
+// int strncmp(const char *string1,const char *string2,size_t count);
+// count 为要比较的字节的个数
+int my_strncmp(const char *string1, const char *string2,int count){
+    assert(string1 && string2);
+    assert(count>=0);
+    int ret = 0;
+    while(count-- && *string1!='\0' && *string2!='\0'){
+        ret += *string1 - *string2;
+        string1++;
+        string2++;
+    }
+    if(ret>0) return 1;
+    else if(ret==0) return 0;
+    else return -1;
+}
+// int main(){
+//     const char *p1 = "abcdef";
+//     const char *p2 = "abcqwer";
+//     int ret1 = strncmp(p1,p2,3);
+//     int ret2 = strncmp(p1,p2,4);
+//     printf("ret1 = %d\n",ret1);
+//     printf("ret2 = %d\n",ret2);
+//     const char *test_p1 = "abcdef";
+//     const char *test_p2 = "abcqwer";
+//     int test_ret1 = my_strncmp(test_p1,test_p2,3);
+//     int test_ret2 = my_strncmp(test_p1,test_p2,4);
+//     printf("test_ret1 = %d\n",test_ret1); 
+//     printf("test_ret2 = %d\n",test_ret2);
+//     return 0;
+// }
+
+// **************************************** strstr ****************************************
+// char *strstr(const char *string, const char *strCharSet);
+// strstr - 查找字符串
+char *my_strstr(const char *p1, const char *p2){
+    assert(p1 && p2);
+    if(*p2 == '\0') return ((char*)p1);
+    char *s1 = (char*)p1;
+    char *s2 = (char*)p2;
+    char *current = (char*)p1;
+    while(*current){
+        s1 = current;
+        s2 =  (char*)p2;
+        while( (*s1!='\0') && (*s2!='\0') && (*s1 == *s2)){
+            s1++;
+            s2++;
+        }
+        if(*s2=='\0'){
+            return current;//找到子串
+        }
+        current++;
+    }
+    return NULL;//找不到子串
+}
+int main(){
+    const char *p1 = "abcdefghi";
+    const char *p2 = "def";
+    char *ret = strstr(p1,p2);
+    if(ret == NULL) printf("字串不存在\n");
+    else printf("%s\n",ret);
+    char *test_p1 = "abcdefghi";
+    char *test_p2 = "def";
+    char *test_p3 = "defq";
+    char *test_p4 = "ghi";
+    char *test_ret1 = my_strstr(test_p1,test_p2);
+    char *test_ret2 = my_strstr(test_p1,test_p3);
+    char *test_ret3 = my_strstr(test_p1,test_p4);
+    printf("test_ret1 = %s\n",test_ret1);
+    printf("test_ret2 = %s\n",test_ret2);
+    printf("test_ret3 = %s\n",test_ret3);
+    return 0;
+}
