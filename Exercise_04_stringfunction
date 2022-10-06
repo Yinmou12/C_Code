@@ -179,9 +179,8 @@ char *my_strncat(char *dest,const char *src,int count){
     assert(dest && src);
     assert(count>=0);
     char *ret = dest;
-    while(*dest){
-        dest++;
-    }
+    while(*dest++);
+    dest--;
     while( count && src ){
         *dest++ = *src++;
         count--;
@@ -190,4 +189,25 @@ char *my_strncat(char *dest,const char *src,int count){
     return ret;
 }
 // int main(){
+//     char arr1[30] = "Hello\0xxxxx";
+//     char arr2[] = "world";
+//     strncat(arr1,arr2,3);
+//     printf("arr1 = %s\n",arr1);
+//     char arr3[30] = "Hello\0xxxxxxxxxxx";
+//     char arr4[] = "world";
+//     strncat(arr3,arr4,8);//只会把world追加过去,然后补上一个'\0'
+//     printf("arr3 = %s\n",arr3);
+//     // test my_strncat
+//     char test_arr1[30] = "Hello\0xxxxx";
+//     char test_arr2[] = "world";
+//     char *test_ret1 = my_strncat(test_arr1,test_arr2,3);
+//     printf("test_arr1 = %s\n",test_arr1);
+//     printf("test_ret1 = %s\n",test_ret1);
+//     char test_arr3[30] = "Hello\0xxxxxxxxxxx";
+//     char test_arr4[] = "world";
+//     char *test_ret2 = my_strncat(test_arr3,test_arr4,8);
+//     printf("test_arr3 = %s\n",test_arr3);
+//     printf("test_ret2 = %s\n",test_ret2);
+//     return 0;
+// }
 
