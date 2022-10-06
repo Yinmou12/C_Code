@@ -260,7 +260,7 @@ char *my_strstr(const char *p1, const char *p2){
             s2++;
         }
         if(*s2=='\0'){
-            return current;//找到子串
+            return current;//找到了子串
         }
         current++;
     }
