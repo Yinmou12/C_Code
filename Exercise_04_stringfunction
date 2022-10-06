@@ -126,3 +126,68 @@ int my_strcmp(const char *string1,const char *string2){
 //     return 0;
 // }
 
+// *********************************** strcpy & strncpy ***********************************
+// char *strcpy(char *strDestination,const char *strSource);
+// strcpy 不受字符串长度的限制，存在安全问题
+// char *strncpy(char *strDest,const char *strSource,size_t count);
+// count > strSource的长度时,会在后面接着补上 (count-strSource的长度) 个 '\0'
+char *my_strncpy(char *dest,const char*source,int count){
+    assert(dest && source);
+    assert(count>=0);
+    char *ret = dest;
+    int i = 0;
+    while(i<count){
+        if(*source == '\0'){
+            *dest = '\0';
+        }
+        else{
+            *dest = *source;
+            source++;
+        }
+        dest++;
+        i++;
+    }
+    return ret;
+}
+// int main(){
+//     char arr1[10] = "abcdef";
+//     char arr2[] = "Hello world";
+//     strncpy(arr1,arr2,4);
+//     printf("arr1 = %s\n",arr1);
+//     char arr3[10] = "abcdefgh";
+//     char arr4[] = "bit";
+//     strncpy(arr3,arr4,6);//长度不够时自动补充'\0' 
+//     printf("arr3 =  %s\n",arr3);//bit\0\0\0gh
+//     // test my_strncpy
+//     char test_arr1[10] = "abcdef";
+//     char test_arr2[] = "Hello world";
+//     char *test_ret1 = my_strncpy(test_arr1, test_arr2, 4);
+//     printf("test_arr2 = %s\n",test_arr1);
+//     printf("test_ret1 = %s\n",test_ret1);
+//     char test_arr3[10] = "abcdefgh";
+//     char test_arr4[] = "bit";
+//     char *test_ret2 = my_strncpy(test_arr3,test_arr4,6);
+//     printf("test_arr3 = %s\n",test_arr3);
+//     printf("test_ret2 = %s\n",test_ret2);
+//     return 0;
+// }
+
+//**************************************** strncat ****************************************
+// char *strncat(char *strDest,const char *strSource,size_t count);
+// count > strSource时,会在追加字符串后在后面补上 一个 '\0'
+char *my_strncat(char *dest,const char *src,int count){
+    assert(dest && src);
+    assert(count>=0);
+    char *ret = dest;
+    while(*dest){
+        dest++;
+    }
+    while( count && src ){
+        *dest++ = *src++;
+        count--;
+    }
+    *dest = '\0';
+    return ret;
+}
+// int main(){
+
