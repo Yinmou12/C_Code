@@ -115,42 +115,42 @@ int left_move_KMP(char *str,char *cmp_str){
     assert(cmp_str!=NULL);
     assert(strlen(str)==strlen(cmp_str));
     //1、self_function
-    // //实现在str字符串后面追加一个str字符串(只适用于该种情况)   
-    // int len = strlen(str);
-    // *(str+len*2) = '\0';
-    // int i=0;
-    // for(i=0;i<len;i++){
-    //     *(str+len+i) = *(str+i);
-    // }
-    // //依次比较cmp_str 和 追加过字符串的str
-    // int str_len = strlen(str);
-    // int cmp_str_len = strlen(cmp_str);
-    // i = 0;
-    // int j = 0;
-    // while(i<str_len && j<cmp_str_len){
-    //     if( *(str+i) == *(cmp_str+j) ){
-    //         i++;
-    //         j++;
-    //     }
-    //     else if( *(str+i) != *(cmp_str+j) ){
-    //         i++;
-    //         j=0;
-    //     }
-    // }
-    // //判断cmp_str是否是追加过字符串的str的子集
-    // if(j>=cmp_str_len) return 1;    //是子集
-    // else if(i>=str_len) return 0;   //不是子集
+    //实现在str字符串后面追加一个str字符串(只适用于该种情况)   
+    int len = strlen(str);
+    *(str+len*2) = '\0';
+    int i=0;
+    for(i=0;i<len;i++){
+        *(str+len+i) = *(str+i);
+    }
+    //依次比较cmp_str 和 追加过字符串的str
+    int str_len = strlen(str);
+    int cmp_str_len = strlen(cmp_str);
+    i = 0;
+    int j = 0;
+    int temp = 0;
+    while(temp<str_len){
+        i = temp;
+        j = 0;
+        while( !(*(str+i) - *(cmp_str+j)) && *(str+i) && *(cmp_str+j) ){
+            i++;
+            j++;
+        }
+        if( !(*(str+i)) ) return 0;     //是子集
+        if( !(*(cmp_str+j)) ) return 1; //不是子集
+        temp++;
+    }
+    return 0;
     
     //2、有两个库函数可以实现字符串追加: strcat 和 strncat
     //使用库函数 strcat 可以实现字符串追加，不能用于字符串给自己追加自己，会丢失'\0'  
     //strncat 实现给字符串追加指定个数的字符
-    int len = strlen(str);
-    strncat(str,str,len);
-    //strstr -- 找字串
-    char *ret = strstr(str,cmp_str);
-    if(ret==NULL) return 0;
-    else return 1;
-}   
+    // int len = strlen(str);
+    // strncat(str,str,len);
+    // //strstr -- 找字串
+    // char *ret = strstr(str,cmp_str);
+    // if(ret==NULL) return 0;
+    // else return 1;
+}
 int main(){
     char arr1[30] = "abcdefg";
     char arr2[] = "defgabc";
